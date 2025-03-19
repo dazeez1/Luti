@@ -159,7 +159,7 @@ class _AdditionalDetailsPageState extends State<AdditionalDetailsPage> {
                   ),
                   Expanded(
                     child: Text(
-                      'By selecting Agree & continue, I agree to Herithomes\' Terms of Service, Payments Terms of Service, Nondiscrimination Policy, and acknowledge the Privacy Policy.',
+                      'By selecting Agree & continue, I agree to Luti\' Terms of Service, Payments Terms of Service, Nondiscrimination Policy, and acknowledge the Privacy Policy.',
                       style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                   ),
