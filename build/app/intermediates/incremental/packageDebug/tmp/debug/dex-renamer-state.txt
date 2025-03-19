@@ -1,4 +1,4 @@
-#Thu Mar 13 20:02:28 CAT 2025
+#Wed Mar 19 00:34:24 CAT 2025
 base.0=/Users/drdrey/Desktop/Luti/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/drdrey/Desktop/Luti/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.2=/Users/drdrey/Desktop/Luti/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
