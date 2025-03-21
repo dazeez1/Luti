@@ -42,8 +42,10 @@ class _SignupPageState extends State<SignupPage> {
               SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: 'Rwanda (+250)',
-                items: <String>['Rwanda (+250)', 'Other Country']
-                    .map((String value) {
+                items: <String>[
+                  'Rwanda (+250)',
+                  'Nigeria (+234)' 'Other Country'
+                ].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
