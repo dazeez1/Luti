@@ -10,41 +10,25 @@ class WelcomePage extends StatelessWidget {
           mainAxisAlignment:
               MainAxisAlignment.center, // Center the column vertically
           children: <Widget>[
-            // Logo and Text in a Row
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Center the row horizontally
-              children: <Widget>[
-                Image.asset(
-                  'assets/logo.png', // Path to your logo image
-                  width: 100, // Adjust the width as needed
-                  height: 100, // Adjust the height as needed
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.error,
-                      color: Colors.red,
-                      size: 100,
-                    ); // Display an error icon if the image fails to load
-                  },
-                ),
-                SizedBox(width: 20), // Space between logo and text
-                Text(
-                  'Luti',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white, // Set text color to white
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            // Logo
+            Image.asset(
+              'assets/logo.png', // Path to your logo image
+              width: 100, // Adjust the width as needed
+              height: 100, // Adjust the height as needed
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  Icons.error,
+                  color: Colors.red,
+                  size: 100,
+                ); // Display an error icon if the image fails to load
+              },
             ),
-            SizedBox(height: 40), // Space between the logo/text and the button
+            SizedBox(height: 20), // Reduced space between logo and button
             // Get Started Button
             ElevatedButton(
               onPressed: () {
                 // Navigate to the Signup Page
                 Navigator.pushNamed(context, '/signup');
-                Navigator.pushNamed(context, '/login');
               },
               child: Text('Get Started'),
               style: ElevatedButton.styleFrom(
