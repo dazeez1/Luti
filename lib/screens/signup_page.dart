@@ -44,7 +44,8 @@ class _SignupPageState extends State<SignupPage> {
                 value: 'Rwanda (+250)',
                 items: <String>[
                   'Rwanda (+250)',
-                  'Nigeria (+234)' 'Other Country'
+                  'Nigeria (+234)',
+                  'Other Country'
                 ].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
