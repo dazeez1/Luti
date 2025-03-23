@@ -6,7 +6,11 @@ import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/additional_details_page.dart';
 
-void main() {
+void main() async
+{
+WidgetsFlutterBinding.ensureInitialized();
+
+await
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppState(),
