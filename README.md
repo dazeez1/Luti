@@ -155,3 +155,35 @@ Follow these steps to get the project up and running on your local machine.
    ```bash
    flutter run
    ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+## Contact
+
+1.  Azeez Damilare Gbenga - [d.azeez@alustudent.com](mailto:d.azeez@alustudent.com)
+2.  Marvelous Nelson - [m.nelson@alustudent.com](mailto:m.nelson@alustudent.com)
+3.  Nana Koramah Abeasi - [n.abeasi@alustudent.com](mailto:n.abeasi@alustudent.com)
+4.  Jeremiah Agbaje - [j.agbaje@alustudent.com](mailto:j.agbaje@alustudent.com)
+5.  Lenine Ngenzi - [l.ngenzi@alustudent.com](mailto:l.ngenzi@alustudent.com)
+
+Project Link: [https://github.com/dazeez1/Luti.git](https://github.com/dazeez1/Luti.git)
+
+## Link to the video demonstration of the project implementation
+
+[Click here]()
+
+## Link to the video demonstration of the project Authentication, App/Business Logic, and Backend.
+
+[Click here]()
