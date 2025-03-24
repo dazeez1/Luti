@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:luti/view/account_screen.dart';
 import 'package:provider/provider.dart';
 import 'state/app_state.dart';
-import 'screens/welcome_page.dart';
-import 'screens/signup_page.dart';
-import 'screens/login_page.dart';
-import 'screens/additional_details_page.dart';
+import 'view/welcome_page.dart';
+import 'view/signup_page.dart';
+import 'view/login_page.dart';
+import 'view/additional_details_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async
 {
-WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-await
+  await Firebase.initializeApp();
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppState(),
@@ -20,9 +24,11 @@ await
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Welcome Page App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -33,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignupPage(),
         '/login': (context) => LoginPage(),
         '/additional-details': (context) => AdditionalDetailsPage(),
+        '/account_screen': (context) => AccountScreen(),
         // Add other routes here
       },
     );
