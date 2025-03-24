@@ -1,16 +1,23 @@
-# luti
+# Luti
 
-A new Flutter project.
+Luti is a Flutter application designed for exploring and booking vacation homes. The app integrates Firebase for backend services, offering features such as location details, booking management, and more.
 
-## Getting Started
+## Table of Contents
 
-This project is a starting point for a Flutter application.
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Firebase Setup](#firebase-setup)
+- [Running the App](#running-the-app)
+- [License](#license)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Explore vacation homes with detailed information and images.
+- Book homes and manage your bookings.
+- Integrated Firebase for backend services.
+- Clean and user-friendly interface.
+- Responsive design for both Android and iOS devices.
