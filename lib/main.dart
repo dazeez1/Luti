@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:luti/view/account_screen.dart';
+import 'package:luti/view/guestScreens/account_screen.dart';
 import 'package:provider/provider.dart';
 import 'state/app_state.dart';
 import 'view/welcome_page.dart';
