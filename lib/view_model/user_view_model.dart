@@ -3,9 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:luti/model/app_constants.dart';
-import 'package:luti/view/account_screen.dart';
+import 'package:luti/model/user_model.dart';
+import 'package:luti/view/guestScreens/account_screen.dart';
+import 'package:luti/view/guest_home_screen.dart';
 
-class UserViewModel {
+class UserViewModel
+{
+  UserModel userModel = UserModel();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> signUp(
@@ -146,7 +150,7 @@ class UserViewModel {
       await _getUserInfoFromFirestore(currentUserID);
 
       // 4. Only navigate after all data is loaded
-      Get.offAll(() => const AccountScreen());
+      Get.offAll(() => const GuestHomeScreen());
 
       // 5. Show success message
       Get.snackbar(
@@ -194,5 +198,22 @@ class UserViewModel {
     } catch (e) {
       throw "Failed to load user data: ${e.toString()}";
     }
+  }
+
+  becomeHost(String userID) async
+  {
+
+    userModel.isMost = true;
+
+    Map<String, dynamic> dataMap =
+    {
+      "isMost": true
+    };
+    await _firestore.collection("users").doc(userID).update(dataMap);
+  }
+
+  modifyCurrentlyHosting(bool isHosting)
+  {
+    userModel.isCurrentlyHosting = isHosting;
   }
 }
