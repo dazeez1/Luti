@@ -64,14 +64,14 @@ class _HostHomeScreenState extends State<HostHomeScreen>
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Color(0xFF2C3E50),
           ),
         ),
         title: Text(
           screenTitles[selectedIndex],
           style: TextStyle(
             fontSize: 18,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         automaticallyImplyLeading: false,

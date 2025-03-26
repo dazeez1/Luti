@@ -30,7 +30,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Welcome Page App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.white),
+          color: Colors.white,
+        ),
         primarySwatch: Colors.blue,
       ),
       home: WelcomePage(),
