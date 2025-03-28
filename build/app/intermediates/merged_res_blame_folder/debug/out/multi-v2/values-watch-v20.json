@@ -4,7 +4,7 @@
             "outputFile": "com.example.luti.app-mergeDebugResources-33:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\HP\\.gradle\\caches\\transforms-3\\741fa7e2450850c6d09038b225968bb1\\transformed\\jetified-play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",
+                    "source": "/Users/jeremiah/.gradle/caches/transforms-3/1cd1b9f6a7eacc142b8ff2303a2b5567/transformed/jetified-play-services-auth-20.7.0/res/values-watch-v20/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",

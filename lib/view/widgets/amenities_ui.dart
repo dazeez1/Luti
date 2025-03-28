@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class AmenitiesUi extends StatefulWidget
 {
-  String type;
-  int startValue;
-  Function decreaseValue;
-  Function increaseValue;
+  final String type;
+  final int startValue;
+  final VoidCallback decreaseValue;
+  final VoidCallback increaseValue;
 
-  AmenitiesUi({super.key, required this.type, required this.startValue, required this.decreaseValue, required this.increaseValue});
+ const  AmenitiesUi({super.key, required this.type, required this.startValue, required this.decreaseValue, required this.increaseValue});
 
   @override
   State<AmenitiesUi> createState() => _AmenitiesUiState();
