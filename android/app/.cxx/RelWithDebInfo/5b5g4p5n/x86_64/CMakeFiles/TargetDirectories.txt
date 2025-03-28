@@ -1,0 +1,2 @@
+/Users/jeremiah/Desktop/Luti/android/app/.cxx/RelWithDebInfo/5b5g4p5n/x86_64/CMakeFiles/edit_cache.dir
+/Users/jeremiah/Desktop/Luti/android/app/.cxx/RelWithDebInfo/5b5g4p5n/x86_64/CMakeFiles/rebuild_cache.dir

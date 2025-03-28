@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Luti.iml" filepath="$PROJECT_DIR$/.idea/Luti.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/luti_android.iml" filepath="$PROJECT_DIR$/android/luti_android.iml" />
     </modules>
   </component>
 </project>
