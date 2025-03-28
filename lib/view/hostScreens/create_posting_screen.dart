@@ -91,9 +91,7 @@ class _CreatePostingScreenState extends State<CreatePostingScreen> {
       _furniture = {'full': 0, 'half': 0, 'None': 0};
 
       _imagesList = [];
-    } 
-    else 
-    {
+    } else {
       _nameTextEditingController =
           TextEditingController(text: widget.posting!.name);
       _priceTextEditingController =
@@ -112,9 +110,7 @@ class _CreatePostingScreenState extends State<CreatePostingScreen> {
       residenceTypeSelected = widget.posting!.type!;
     }
 
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -172,12 +168,36 @@ class _CreatePostingScreenState extends State<CreatePostingScreen> {
               postingModel.setImagesNames();
 
               // IF THIS IS NEW POST OR  OLD POST
-              postingModel.rating = 3.5;
-              postingModel.bookings = [];
-              postingModel.reviews = [];
-              await postingViewModel.addListingInfoToFirestore();
+              if (widget.posting == null) {
+                postingModel.rating = 3.5;
+                postingModel.bookings = [];
+                postingModel.reviews = [];
+                await postingViewModel.addListingInfoToFirestore();
 
-              await postingViewModel.addImagesToFireBaseStorage();
+                await postingViewModel.addImagesToFireBaseStorage();
+
+                Get.snackbar(
+                    "New Listing", "your new listing is uploaded successfully");
+              } else {
+                postingModel.rating = widget.posting!.rating;
+                postingModel.bookings = widget.posting!.bookings;
+                postingModel.reviews = widget.posting!.reviews;
+                postingModel.id = widget.posting!.id;
+
+                for (int i = 0;
+                    i < AppConstants.currentUser.myPostings!.length;
+                    i++) {
+                  if (AppConstants.currentUser.myPostings![i].id ==
+                      postingModel.id) {
+                    AppConstants.currentUser.myPostings![i] = postingModel;
+                    break;
+                  }
+                }
+                await postingViewModel.updatePostingInfoToFirestore();
+
+                
+
+              }
 
               Get.to(HostHomeScreen());
             },
