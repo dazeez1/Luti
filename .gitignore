@@ -43,3 +43,84 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+android/app/.cxx/
+android/.gradle/
+android/.idea/
+android/app/build/# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/app/.cxx/
+android/.gradle/
+android/.idea/
+android/app/build/
+
+# Added .gitignore rules for common IDEs and build tools
+.vscode/
+/.idea/
+/.vs/
+/.eclipse/
+/.metadata/
+/.classpath
+/.project
+
+# Added .gitignore rules for common operating system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Added .gitignore rules for common editor files
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.nbi
+*.nb-configuration
+*.directory
+
+# Added .gitignore rules for common package managers
+package-lock.json
+yarn.lock
+requirements.txt
+
