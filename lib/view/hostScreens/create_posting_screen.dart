@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:luti/global.dart';
 import 'package:luti/model/app_constants.dart';
 import 'package:luti/model/posting_model.dart';
+import 'package:luti/view/guest_home_screen.dart';
 // import 'package:luti/model/posting_model.dart';
 import 'package:luti/view/host_home_screen.dart';
 import 'package:luti/view/widgets/amenities_ui.dart';
@@ -178,7 +179,9 @@ class _CreatePostingScreenState extends State<CreatePostingScreen> {
 
                 Get.snackbar(
                     "New Listing", "your new listing is uploaded successfully");
-              } else {
+              } 
+              else 
+              {
                 postingModel.rating = widget.posting!.rating;
                 postingModel.bookings = widget.posting!.bookings;
                 postingModel.reviews = widget.posting!.reviews;
@@ -195,14 +198,16 @@ class _CreatePostingScreenState extends State<CreatePostingScreen> {
                 }
                 await postingViewModel.updatePostingInfoToFirestore();
 
-                
-
+                Get.snackbar("Update Listing",
+                    "your new listing is updated successfully");
               }
+              //clear posting model
+              postingModel = PostingModel();
 
               Get.to(HostHomeScreen());
             },
             icon: const Icon(Icons.upload),
-          )
+          ),
         ],
       ),
       body: Center(

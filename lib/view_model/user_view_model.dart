@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -121,6 +124,19 @@ class UserViewModel {
     } catch (e) {
       throw Exception("Failed to save user data: $e");
     }
+  }
+
+  addImageToFirebaseStorage(File imageFileOfUser, currentUserID) async {
+    Reference referenceStorage = FirebaseStorage.instance
+        .ref()
+        .child("userImages")
+        .child(currentUserID)
+        .child(currentUserID + ".png");
+
+    await referenceStorage.putFile(imageFileOfUser).whenComplete(() {});
+
+    AppConstants.currentUser.displayImage =
+        MemoryImage(imageFileOfUser.readAsBytesSync());
   }
 
   Future<void> login(String email, String password) async {

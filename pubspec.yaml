@@ -41,6 +41,8 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_storage:
+  custom_rating_bar:
+
   
 
 dev_dependencies:

@@ -99,13 +99,93 @@ class PostingModel {
     return displayImages;
   }
 
-  getAmenitiesString() 
-  {
+  getFirstImageFromStorage() async {
+    if (displayImages!.isNotEmpty) {
+      return displayImages!.first;
+    }
+
+    final imageData = await FirebaseStorage.instance
+        .ref()
+        .child(
+            "postingImages") // Use actual name here for where images are stored.
+        .child(id!)
+        .child(imageNames!.first)
+        .getData(1024 * 1024);
+
+    displayImages!.add(MemoryImage(imageData!));
+
+    return displayImages!.first;
+  }
+
+  getAmenitiesString() {
     if (amenities!.isEmpty) {
       return "";
     }
     String amenitiesString = amenities.toString();
 
-    return amenitiesString.substring(1, amenitiesString.length-1);
+    return amenitiesString.substring(1, amenitiesString.length - 1);
+  }
+
+  double getCurrentRating() {
+    if (reviews!.length == 0) {
+      return 4;
+    }
+
+    double rating = 0;
+
+    reviews!.forEach((review) {
+      rating += review.rating!;
+    });
+
+    rating /= reviews!.length;
+    return rating;
+  }
+
+  getHostFromFirestore() async {
+    await host!.getContactInfoFromFirestore();
+    await host!.getImageFromStorage();
+  }
+
+  int getGuestsNumber() {
+    int? numGuests = 0;
+    numGuests = numGuests + beds!['small']!;
+    numGuests = numGuests + beds!['medium']! * 2;
+    numGuests = numGuests + beds!['large']! * 2;
+
+    return numGuests;
+  }
+
+  String getBedroomText() {
+    String text = "";
+
+    if (beds!['small'] != 0) {
+      text = text + beds!['small'].toString() + "single/twin";
+    }
+
+    if (beds!['medium'] != 0) {
+      text = text + beds!['medium'].toString() + "double";
+    }
+
+    if (beds!['large'] != 0) {
+      text = text + beds!["large"].toString() + "queen/king";
+    }
+    return text;
+  }
+
+  String getBathroomText() {
+    String text = "";
+
+    if (bathrooms!['full'] != 0) {
+      text = text + bathrooms!['full'].toString() + "full";
+    }
+
+    if (bathrooms!['half'] != 0) {
+      text = text + bathrooms!["half"].toString() + "half";
+    }
+    return text;
+  }
+
+  String getFullAddress() {
+    return address! + ", " + city! + ", " + country! + ", ";
   }
 }
