@@ -1,209 +1,173 @@
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:luti/model/app_constants.dart';
 import 'package:luti/model/user_model.dart';
 import 'package:luti/view/guestScreens/account_screen.dart';
 import 'package:luti/view/guest_home_screen.dart';
 
-class UserViewModel {
-  UserModel userModel = UserModel();
+class UserViewModel extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> signUp(
-    String email,
-    String password,
-    String firstName,
-    String lastName,
-    String city,
-    String country,
-    String bio,
-  ) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required String city,
+    required String country,
+    required String bio,
+    String? phone,
+  }) async {
     try {
       Get.snackbar(
         "Please wait",
-        "Your account is being created",
+        "Creating your account...",
         snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 2),
       );
 
-      final UserCredential result =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      final UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
 
-      final String currentUserID = result.user!.uid;
-      AppConstants.currentUser.id = currentUserID;
-      AppConstants.currentUser.firstName = firstName;
-      AppConstants.currentUser.lastName = lastName;
-      AppConstants.currentUser.city = city;
-      AppConstants.currentUser.country = country;
-      AppConstants.currentUser.bio = bio;
-      AppConstants.currentUser.email = email;
-      AppConstants.currentUser.password = password;
+      final String userId = result.user!.uid;
 
-      await _saveUserToFirestore(
-        bio: bio,
-        city: city,
-        country: country,
+      AppConstants.currentUser = UserModel(
+        id: userId,
         email: email,
         firstName: firstName,
         lastName: lastName,
-        id: currentUserID,
+        city: city,
+        country: country,
+        bio: bio,
+        phone: phone,
       );
 
-      Get.snackbar(
-        "Congratulations!",
-        "Your account has been created successfully",
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
-        colorText: Colors.white,
-        backgroundColor: Colors.green,
-      );
+      await AppConstants.currentUser.saveUserToFirestore().catchError((error) {
+        // Catch any errors during Firestore write
+        print("Error saving user to Firestore during signup: $error");
+        Get.snackbar("Error", "Failed to save user data. Please try again.");
+        throw error; // Re-throw the error to be caught by the outer catch
+      });
+
+      await _initializeCurrentUser(userId);
 
       Get.offAll(() => const AccountScreen());
+      Get.snackbar("Success", "Account created successfully");
     } on FirebaseAuthException catch (e) {
-      String errorMessage = "Signup failed";
-      if (e.code == 'weak-password') {
-        errorMessage = "Password is too weak";
-      } else if (e.code == 'email-already-in-use') {
-        errorMessage = "Email is already in use";
-      }
-
-      Get.snackbar(
-        "Error",
-        errorMessage,
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
-      );
+      String error = "Signup failed";
+      if (e.code == 'weak-password') error = "Password is too weak";
+      if (e.code == 'email-already-in-use') error = "Email already in use";
+      Get.snackbar("Error", error);
     } catch (e) {
-      Get.snackbar(
-        "Error",
-        "An unexpected error occurred",
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
-      );
-    }
-  }
-
-  Future<void> _saveUserToFirestore({
-    required String bio,
-    required String city,
-    required String country,
-    required String email,
-    required String firstName,
-    required String lastName,
-    required String id,
-  }) async {
-    try {
-      final Map<String, dynamic> dataMap = {
-        "bio": bio,
-        "city": city,
-        "country": country,
-        "email": email,
-        "firstName": firstName,
-        "lastName": lastName,
-        "isMost": false,
-        "myPostingIDs": [],
-        "savedPostingIDs": [],
-        "earnings": 0,
-        "createdAt": FieldValue.serverTimestamp(),
-        "updatedAt": FieldValue.serverTimestamp(),
-      };
-
-      await _firestore.collection("users").doc(id).set(dataMap);
-    } catch (e) {
-      throw Exception("Failed to save user data: $e");
+      print("Unexpected error during signup: $e");
+      Get.snackbar("Error", "An unexpected error occurred: ${e.toString()}");
     }
   }
 
   Future<void> login(String email, String password) async {
     try {
-      // Show loading snackbar
       Get.snackbar(
         "Please wait",
-        "Checking your credentials...",
+        "Signing you in...",
         snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 2),
       );
 
-      // 1. Authenticate with Firebase Auth
-      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      final UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
 
-      // 2. Set basic user info
-      String currentUserID = result.user!.uid;
-      AppConstants.currentUser.id = currentUserID;
-      AppConstants.currentUser.email = email;
+      final String userId = result.user!.uid;
+      await _initializeCurrentUser(userId);
 
-      // 3. Fetch additional user data from Firestore
-      await _getUserInfoFromFirestore(currentUserID);
-      await AppConstants.currentUser.getMyPostingsFromFirestore();
-
-      // 4. Only navigate after all data is loaded
       Get.offAll(() => const GuestHomeScreen());
-
-      // 5. Show success message
-      Get.snackbar(
-        "Success",
-        "You are logged in successfully",
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
-        colorText: Colors.white,
-        backgroundColor: Colors.green,
-      );
+      Get.snackbar("Success", "Logged in successfully");
     } on FirebaseAuthException catch (e) {
-      // Handle auth errors
-      String errorMessage = "Login failed";
-      if (e.code == 'user-not-found') {
-        errorMessage = "No user found with this email";
-      } else if (e.code == 'wrong-password') {
-        errorMessage = "Incorrect password";
-      }
-      throw errorMessage; // Throw specific error
+      String error = "Login failed";
+      if (e.code == 'user-not-found') error = "User not found";
+      if (e.code == 'wrong-password') error = "Incorrect password";
+      Get.snackbar("Error", error);
     } catch (e) {
-      // Handle other errors
-      throw "Failed to complete login: ${e.toString()}";
+      print("Error during login: ${e.toString()}");
+      Get.snackbar("Error", "Login failed: ${e.toString()}");
     }
   }
 
-  Future<void> _getUserInfoFromFirestore(String userID) async {
+  Future<void> _initializeCurrentUser(String userId) async {
     try {
+      print("Attempting to fetch user document for ID: $userId");
       DocumentSnapshot snapshot =
-          await _firestore.collection("users").doc(userID).get();
+          await _firestore.collection("users").doc(userId).get();
 
       if (!snapshot.exists) {
-        throw "User data not found in database";
+        print("User document not found for ID: $userId");
+        throw Exception("User document not found");
       }
 
-      // Update all user properties
-      AppConstants.currentUser.snapshot = snapshot;
-      AppConstants.currentUser.firstName = snapshot["firstName"] ?? "";
-      AppConstants.currentUser.lastName = snapshot["lastName"] ?? "";
-      AppConstants.currentUser.bio = snapshot["bio"] ?? "";
-      AppConstants.currentUser.city = snapshot["city"] ?? "";
-      AppConstants.currentUser.country = snapshot["country"] ?? "";
+      print("User document found. Attempting to load data.");
+      AppConstants.currentUser = UserModel(
+        id: userId,
+        email: snapshot['email'] ,
+        firstName: snapshot['firstName'],
+        lastName: snapshot['lastName'],
+        city: snapshot['city'],
+        country: snapshot['country'],
+        bio: snapshot['bio'],
+        phone: snapshot['phone'],
+      )..snapshot = snapshot;
+
+      try {
+        print("Attempting to load additional user data (loadUserData)");
+        await AppConstants.currentUser.loadUserData(snapshot);
+        print("Additional user data (loadUserData) loaded successfully");
+      } catch (e) {
+        print("Error loading additional user data (loadUserData): $e");
+        throw Exception("Failed to load additional user data: $e");
+      }
+
+      try {
+        print("Attempting to load my postings");
+        await AppConstants.currentUser.getMyPostingsFromFirestore();
+        print("My postings loaded successfully");
+      } catch (e) {
+        print("Error loading my postings: $e");
+      }
+
+      try {
+        print("Attempting to load saved postings");
+        await AppConstants.currentUser.getSavedPostingsFromFirestore();
+        print("Saved postings loaded successfully");
+      } catch (e) {
+        print("Error loading saved postings: $e");
+      }
     } catch (e) {
-      throw "Failed to load user data: ${e.toString()}";
+      print("Error initializing current user: $e");
+      throw Exception("Failed to initialize user: $e");
     }
   }
 
-  becomeHost(String userID) async {
-    userModel.isMost = true;
+  Future<void> becomeHost(String userId) async {
+    try {
+      await _firestore.collection("users").doc(userId).update({
+        "isMost": true,
+        "updatedAt": FieldValue.serverTimestamp(),
+      });
 
-    Map<String, dynamic> dataMap = {"isMost": true};
-    await _firestore.collection("users").doc(userID).update(dataMap);
+      AppConstants.currentUser.isMost = true;
+      Get.snackbar("Success", "You are now a host");
+    } catch (e) {
+      Get.snackbar("Error", "Failed to update host status");
+    }
   }
 
-  modifyCurrentlyHosting(bool isHosting) {
-    userModel.isCurrentlyHosting = isHosting;
+  void modifyCurrentlyHosting(bool isHosting) {
+    AppConstants.currentUser.isCurrentlyHosting = isHosting;
+  }
+
+  // Add this method to handle user persistence
+  Future<void> checkAuthState() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await _initializeCurrentUser(user.uid);
+    }
   }
 }
