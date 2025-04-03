@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.luti.app-mergeDebugResources-33:/values-v21/values-v21.xml",
+            "outputFile": "com.example.luti.app-mergeDebugResources-35:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/Users/jeremiah/.gradle/caches/transforms-3/6de47aff09eaa46e79b932a1a5800433/transformed/core-1.13.1/res/values-v21/values-v21.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\952e63fd78772fde22f1f772bc6a4468\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/jeremiah/.gradle/caches/transforms-3/ad3ef27c2d4d08b43c091c79f76a9e9f/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/res/values-v21/values-v21.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\08a6e854303be601271eaf0d3e82df03\\transformed\\jetified-credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

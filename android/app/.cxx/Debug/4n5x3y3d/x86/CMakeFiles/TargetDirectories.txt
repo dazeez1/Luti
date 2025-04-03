@@ -1,0 +1,2 @@
+C:/flutter/Luti/android/app/.cxx/Debug/4n5x3y3d/x86/CMakeFiles/edit_cache.dir
+C:/flutter/Luti/android/app/.cxx/Debug/4n5x3y3d/x86/CMakeFiles/rebuild_cache.dir

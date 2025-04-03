@@ -21,6 +21,7 @@ class _GuestHomeScreenState extends State<GuestHomeScreen>
   final List<String> screenTitles = [
     'Explore',
     'Saved',
+    'Messages',
     'Profile',
   ];
 
@@ -90,7 +91,8 @@ class _GuestHomeScreenState extends State<GuestHomeScreen>
         [
           customNavigationBarItem(0, Icons.search, screenTitles[0]),
           customNavigationBarItem(1, Icons.favorite_border, screenTitles[1]),
-          customNavigationBarItem(2, Icons.person_outline, screenTitles[2]),
+          customNavigationBarItem(3, Icons.chat_bubble_outline, screenTitles[2]),
+          customNavigationBarItem(2, Icons.person_outline, screenTitles[3]),
         ],
       ),
     );

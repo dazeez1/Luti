@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.luti.app-mergeDebugResources-33:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.example.luti.app-mergeDebugResources-35:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/Users/jeremiah/.gradle/caches/transforms-3/1cd1b9f6a7eacc142b8ff2303a2b5567/transformed/jetified-play-services-auth-20.7.0/res/values-watch-v20/values.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\b6a2f1eedcd3bb5c11d481a1cdb2d692\\transformed\\jetified-play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
