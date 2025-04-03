@@ -5,83 +5,49 @@ class AmenitiesUi extends StatefulWidget
 {
   final String type;
   final int startValue;
-  final VoidCallback decreaseValue;
-  final VoidCallback increaseValue;
+  final Function decreaseValue;
+  final Function increaseValue;
 
- const  AmenitiesUi({super.key, required this.type, required this.startValue, required this.decreaseValue, required this.increaseValue});
+  const AmenitiesUi({super.key, required this.type, required this.startValue, required this.decreaseValue, required this.increaseValue});
 
   @override
   State<AmenitiesUi> createState() => _AmenitiesUiState();
 }
 
-class _AmenitiesUiState extends State<AmenitiesUi>
-{
-  int? _valueDigit;
-
+class _AmenitiesUiState extends State<AmenitiesUi> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    _valueDigit = widget.startValue;
-  }
-
-  @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-
         Text(
           widget.type,
           style: const TextStyle(
             fontSize: 18.0,
           ),
         ),
-
         Row(
-          children:<Widget>[
-
+          children: <Widget>[
             IconButton(
-                icon: const Icon(Icons.remove),
-                onPressed: (){
-                  widget.decreaseValue();
-
-                  _valueDigit = _valueDigit! - 1;
-                  if(_valueDigit! < 0){
-                    _valueDigit = 0;
-                  }
-                  setState(() {
-
-                  });
-                },
+              icon: const Icon(Icons.remove),
+              onPressed: () {
+                widget.decreaseValue();
+              },
             ),
-
             Text(
-              _valueDigit.toString(),
+              widget.startValue.toString(),
               style: const TextStyle(
                 fontSize: 20.0,
               ),
             ),
-
             IconButton(
               icon: const Icon(Icons.add),
-              onPressed: (){
+              onPressed: () {
                 widget.increaseValue();
-
-                _valueDigit = _valueDigit! + 1;
-
-                setState(() {
-
-                });
               },
             ),
-
-
           ],
         )
-
       ],
     );
   }

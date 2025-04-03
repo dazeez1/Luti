@@ -3,7 +3,6 @@ import 'package:luti/view/guestScreens/account_screen.dart';
 import 'package:luti/view/guestScreens/chat_screen.dart';
 import 'package:luti/view/guestScreens/explore_screen.dart';
 import 'package:luti/view/guestScreens/saved_listings_screen.dart';
-import 'package:luti/view/guestScreens/trips_screen.dart';
 
 class GuestHomeScreen extends StatefulWidget {
   const GuestHomeScreen({super.key});
@@ -22,15 +21,12 @@ class _GuestHomeScreenState extends State<GuestHomeScreen>
   final List<String> screenTitles = [
     'Explore',
     'Saved',
-    'Homes',
-    'Messages',
     'Profile',
   ];
 
   final List<Widget> screens = [
     ExploreScreen(),
     SavedListingsScreen(),
-    TripsScreen(),
     ChatScreen(),
     AccountScreen(),
   ];
@@ -94,9 +90,7 @@ class _GuestHomeScreenState extends State<GuestHomeScreen>
         [
           customNavigationBarItem(0, Icons.search, screenTitles[0]),
           customNavigationBarItem(1, Icons.favorite_border, screenTitles[1]),
-          customNavigationBarItem(2, Icons.hotel, screenTitles[2]),
-          customNavigationBarItem(3, Icons.message, screenTitles[3]),
-          customNavigationBarItem(4, Icons.person_outline, screenTitles[4]),
+          customNavigationBarItem(2, Icons.person_outline, screenTitles[2]),
         ],
       ),
     );

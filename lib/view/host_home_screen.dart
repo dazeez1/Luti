@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:luti/view/guestScreens/account_screen.dart';
 import 'package:luti/view/guestScreens/chat_screen.dart';
 import 'package:luti/view/hostScreens/my_postings_screen.dart';
-import 'package:luti/view/hostScreens/purchases_screen.dart';
+import 'package:luti/view/hostScreens/rentals_screen.dart';
 
 class HostHomeScreen extends StatefulWidget {
-  const HostHomeScreen({super.key});
+  final int? index;
+
+  const HostHomeScreen({super.key, this.index});
 
   @override
   State<HostHomeScreen> createState() => _HostHomeScreenState();
@@ -19,14 +21,14 @@ class _HostHomeScreenState extends State<HostHomeScreen>
   int selectedIndex = 0;
 
   final List<String> screenTitles = [
-    'Purchases',
+    'Rentals',
     'My Postings',
     'Messages',
     'Profile',
   ];
 
   final List<Widget> screens = [
-    PurchasesScreen(),
+    RentalScreen(),
     MyPostingsScreen(),
     ChatScreen(),
     AccountScreen(),
@@ -57,6 +59,16 @@ class _HostHomeScreenState extends State<HostHomeScreen>
       label: '', // Set to empty string since we're handling it manually
     );
   }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    selectedIndex = widget.index ?? 3;
+  }
+
 
   @override
   Widget build(BuildContext context) {
