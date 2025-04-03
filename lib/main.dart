@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:luti/view/conversation_screen.dart';
 import 'package:luti/view/guestScreens/account_screen.dart';
 import 'package:provider/provider.dart';
 import 'state/app_state.dart';
@@ -45,8 +46,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/additional-details': (context) => AdditionalDetailsPage(),
         '/account_screen': (context) => AccountScreen(),
+        '/conversation_screen': (context) => ConversationScreen(),
         // Add other routes here
       },
     );
   }
 }
+
