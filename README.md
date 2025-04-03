@@ -1,4 +1,4 @@
-# 
+# Luti
 
 Luti is a Flutter application designed for exploring and booking vacation homes. The app integrates Firebase for backend services, offering features such as location details, booking management, and more.
 
