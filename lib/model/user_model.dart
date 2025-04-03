@@ -6,7 +6,7 @@ import 'package:luti/model/booking_model.dart';
 import 'package:luti/model/contact_model.dart';
 import 'package:luti/model/conversation_model.dart';
 import 'package:luti/model/posting_model.dart';
-import 'package:luti/model/review.model.dart';
+import 'package:luti/model/review_model.dart';
 
 class UserModel extends ContactModel {
   // User Profile Data

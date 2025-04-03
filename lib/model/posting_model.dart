@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../global.dart';
 import 'app_constants.dart';
-import 'review.model.dart';
+import 'review_model.dart';
 import 'booking_model.dart';
 import 'contact_model.dart';
 import 'user_model.dart'; // Import UserModel

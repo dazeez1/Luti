@@ -94,21 +94,21 @@ Follow these steps to get the project up and running on your local machine.
 5. **Configure iOS Project:**
 
    - Add the `GoogleService-Info.plist` file to `ios/Runner`.
-   - Modify `ios/Runner/Info.plist`:
+     - Modify `ios/Runner/Info.plist`:
 
-     ```xml
-     <key>CFBundleURLTypes</key>
-     <array>
-         <dict>
-             <key>CFBundleTypeRole</key>
-             <string>Editor</string>
-             <key>CFBundleURLSchemes</key>
-             <array>
-                 <string>YOUR_REVERSED_CLIENT_ID</string>
-             </array>
-         </dict>
-     </array>
-     ```
+       ```xml
+       <key>CFBundleURLTypes</key>
+         <array>
+           <dict>
+               <key>CFBundleTypeRole</key>
+               <string>Editor</string>
+               <key>CFBundleURLSchemes</key>
+               <array>
+                   <string>YOUR_REVERSED_CLIENT_ID</string>
+               </array>
+           </dict>
+       </array>
+       ```
 
    - Modify `ios/Podfile`:
 
